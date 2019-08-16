@@ -1,0 +1,91 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: £gVision V5.20.0.0
+Copyright (C) 2016 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: user user, user, LIC=MPPMM-XJ3NJ-Z9SG9-4SYVY-N20WI-T1L53
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.20
+Toolchain Path:  C:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 2 (build 183)
+Assembler:       Armasm.exe V5.06 update 2 (build 183)
+Linker/Locator:  ArmLink.exe V5.06 update 2 (build 183)
+Library Manager: ArmAr.exe V5.06 update 2 (build 183)
+Hex Converter:   FromElf.exe V5.06 update 2 (build 183)
+CPU DLL:         SARMCM3.DLL V5.20
+Dialog DLL:      DCM.DLL V1.13.7.0
+Target DLL:      UL2CM3.DLL V1.157.18.0
+Dialog DLL:      TCM.DLL V1.14.9.0
+ 
+<h2>Project:</h2>
+C:\Users\daniel\Desktop\MDK\SIPModule-G76-v1.15.10\apps\SIPModule.uvprojx
+Project File Date:  09/20/2017
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 2 (build 183)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'SIPModule'
+compiling main.c...
+main.c(1): error:  #5: cannot open source input file "FreeRTOS.h": No such file or directory
+  #include "FreeRTOS.h"
+main.c: 0 warnings, 1 error
+compiling timer_task.c...
+.\include\timer_task.h(8): error:  #5: cannot open source input file "FreeRTOS.h": No such file or directory
+  #include "FreeRTOS.h"
+timer_task.c: 0 warnings, 1 error
+compiling uart_task.c...
+uart_task.c(4): error:  #5: cannot open source input file "FreeRTOS.h": No such file or directory
+  #include "FreeRTOS.h"
+uart_task.c: 0 warnings, 1 error
+compiling at_command_list.c...
+at_command\at_command_app.h(8): error:  #5: cannot open source input file "board.h": No such file or directory
+  #include "board.h"
+at_command\at_command_list.c: 0 warnings, 1 error
+compiling radio_task.c...
+.\include\radio_task.h(7): error:  #5: cannot open source input file "FreeRTOS.h": No such file or directory
+  #include "FreeRTOS.h"
+radio_task.c: 0 warnings, 1 error
+compiling LoRaMac.c...
+..\peripherals\include\sx1276.h(9): error:  #5: cannot open source input file "FreeRTOS.h": No such file or directory
+  #include "FreeRTOS.h"
+LoRaMac\LoRaMac.c: 0 warnings, 1 error
+compiling LoRaMacCrypto.c...
+compiling reporter_task.c...
+.\include\reporter_task.h(8): error:  #5: cannot open source input file "FreeRTOS.h": No such file or directory
+  #include "FreeRTOS.h"
+reporter_task.c: 0 warnings, 1 error
+compiling at_command_app.c...
+at_command\at_command_app.c(1): error:  #5: cannot open source input file "FreeRTOS.h": No such file or directory
+  #include "FreeRTOS.h"
+at_command\at_command_app.c: 0 warnings, 1 error
+compiling misc.c...
+"no source": Error:  #5: cannot open source input file "..\board\STM32L1xx_StdPeriph_Driver\src\misc.c": No such file or directory
+..\board\STM32L1xx_StdPeriph_Driver\src\misc.c: 0 warnings, 1 error
+compiling gpio-board.c...
+"no source": Error:  #5: cannot open source input file "..\board\interface\gpio-board.c": No such file or directory
+..\board\interface\gpio-board.c: 0 warnings, 1 error
+compiling uart-board.c...
+"no source": Error:  #5: cannot open source input file "..\board\interface\uart-board.c": No such file or directory
+..\board\interface\uart-board.c: 0 warnings, 1 error
+compiling hwtimer-board.c...
+"no source": Error:  #5: cannot open source input file "..\board\interface\hwtimer-board.c": No such file or directory
+..\board\interface\hwtimer-board.c: 0 warnings, 1 error
+compiling stm32l1xx_it.c...
+"no source": Error:  #5: cannot open source input file "..\board\stm32l1xx_it.c": No such file or directory
+..\board\stm32l1xx_it.c: 0 warnings, 1 error
+assembling startup_stm32l1xx_md.s...
+startup_stm32l1xx_md.s: error: A1023E: File "..\board\cmsis\device\startup_stm32l1xx_md.s" could not be opened: No such file or directory
+".\Objects\SIPModule.axf" - 9 Error(s), 0 Warning(s).
+
+<h2>Collection of Component include folders:</h2>
+  C:\Users\daniel\Desktop\MDK\SIPModule-G76-v1.15.10\apps\RTE
+  C:\Keil_v5\ARM\PACK\Keil\STM32L1xx_DFP\1.0.2\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+Target not created.
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
