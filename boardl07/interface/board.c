@@ -427,10 +427,13 @@ void BoardInitPeriph( void )
     }
 //    GPIO_ConfigAN();
 // #if defined (MODBUS_BOARD) || defined (NODE_BOARD)
+#if defined (HAYLEYS_MOTOR)
     SpiInit(SPIInterface1);
+#endif
 // #elif defined (TRACKER_BOARD) || defined (SIPMODULE_BOARD) || defined (MANHOLE_BOARD) || defined (EARTAG_BOARD)
-    SpiInit(SPIInterface2);
-// #endif
+#if defined (SIPMODULE_BOARD)
+		SpiInit(SPIInterface2);
+#endif
 
 #if defined (TRACKER_BOARD) || defined (MANHOLE_BOARD) || defined (NODE_BOARD) || defined (RPMA_ST_NODE)
     I2C1Init();
