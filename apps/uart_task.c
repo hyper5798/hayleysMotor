@@ -1784,7 +1784,12 @@ void UartTask(void * pvParameters)
 											{
 												//For AT_COmmand
 												if((receivedChar == CHAR_LF)||(receivedChar == CHAR_CR))
-												{
+												{   //Jason fix return error message at 2019.08.16
+													
+													  if(receivedLength == 0)
+														{
+																break;
+														}
 														receivedCharBuffer[receivedLength] = (uint8_t) 0;
 														receivedCommandLine.character = receivedCharBuffer;
 														receivedCommandLine.length   = receivedLength;

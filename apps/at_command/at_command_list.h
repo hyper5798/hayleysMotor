@@ -59,7 +59,7 @@
 #define IO_PINC_SIZE       8  // Jason add for pin c control on 2019.01.28
 /*Constant Value*/
 #if defined( STM32L073xx )
-static const uint8_t SIPMODULE_FW_VERSION[] = "v1.15.10.5_modify5";//for SGMR //Jason modify on 2019.08.16
+static const uint8_t SIPMODULE_FW_VERSION[] = "v1.15.10.5_modify7";//for SGMR //Jason modify on 2019.08.16
 #ifdef SIPMODULE_G78S
 static const uint8_t SIPMODULE_MODEL_ID[] = "G78S";//for SGMM
 #else
