@@ -3839,14 +3839,14 @@ uint8_t converterStringToAscii(uint8_t* asciiArray, uint8_t* strArray)
 const GpioMapping_t GpioMappingTable[]=
 {
     {"PB8",LED_FCT}, // For Restore default pin
-    {"PA3",UART_RX},// UART 2 RX
-    {"PA2",UART_TX},// UART 2 TX
+    //{"PA3",UART_RX},// UART 2 RX //Jason mark at 2019.08.19
+    //{"PA2",UART_TX},// UART 2 TX //Jason mark at 2019.08.19
     {"PB6",I2C_SCL}, // for IRQ0
     {"PB7",I2C_SDA},// for IRQ1
-    {"PA4",SPI1_NSS},
-    {"PA5",SPI1_SCK},
-    {"PA6",SPI1_MISO},
-    {"PA7",SPI1_MOSI},
+    //{"PA4",SPI1_NSS}, //Jason mark at 2019.08.19
+    //{"PA5",SPI1_SCK}, //Jason mark at 2019.08.19
+    //{"PA6",SPI1_MISO},//Jason mark at 2019.08.19
+    //{"PA7",SPI1_MOSI},//Jason mark at 2019.08.19
     {"PB1",INT_2},
     {"PB0",INT_1},
     {"PA12",UART1_RTS},

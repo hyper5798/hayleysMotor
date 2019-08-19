@@ -173,7 +173,7 @@
 #define TEMPREALMAX                                 60
 void BoardSetBatteryCal(uint16_t value);
 
-#elif MANHOLE_BOARD
+#elif MANHOLE_BOARD 
 
 #define RADIO_RESET                       PB_10
 #define SPI_MOSI                          PB_15
@@ -381,59 +381,61 @@ void BoardSetBatteryCal(uint16_t value);
 
 #elif SIPMODULE_BOARD
 
-#define LED_TX      PB_5
-#define LED_FCT    PB_8
-#define INT_1        PB_0
-#define INT_2        PB_1
+#define LED_TX                          PB_5
+#define LED_FCT                         PB_8
+#define INT_1                           PB_0
+#define INT_2                           PB_1
 
-#define WKUP1                             PA_0
+#define WKUP1                           PA_0
 
-#define SPI1_NSS                     PA_4
-#define SPI1_SCK                     PA_5
-#define SPI1_MISO                   PA_6
-#define SPI1_MOSI                   PA_7
+#define SPI1_NSS                        PA_4
+#define SPI1_SCK                        PA_5
+#define SPI1_MISO                       PA_6
+#define SPI1_MOSI                       PA_7
 
-#define RADIO_RESET                    PB_10
-#define SPI_MOSI                          PB_15
-#define SPI_MISO                          PB_14
-#define SPI_SCLK                          PB_13
-#define SPI_CS                              PB_12
+#define SPI1_NSS_FLASH                  PB_2
 
-#define RADIO_DIO_0                       PB_11
-#define RADIO_DIO_1                       PC_13
-#define RADIO_DIO_2                       PB_9
-#define RADIO_DIO_3                       PB_4
-#define RADIO_DIO_4                       PB_3
-#define RADIO_DIO_5                       PA_15
-#define RADIO_ANT_SWITCH_HF      PA_0
-#define RADIO_ANT_SWITCH_LF       PA_1
+#define RADIO_RESET                     PB_10
+#define SPI_MOSI                        PB_15
+#define SPI_MISO                        PB_14
+#define SPI_SCLK                        PB_13
+#define SPI_CS                          PB_12
+
+#define RADIO_DIO_0                     PB_11
+#define RADIO_DIO_1                     PC_13
+#define RADIO_DIO_2                     PB_9
+#define RADIO_DIO_3                     PB_4
+#define RADIO_DIO_4                     PB_3
+#define RADIO_DIO_5                     PA_15
+#define RADIO_ANT_SWITCH_HF             PA_0
+#define RADIO_ANT_SWITCH_LF             PA_1
 #ifdef ANT_PA
-#define RADIO_ANT_PA              PC_8
+#define RADIO_ANT_PA                    PC_8
 #endif
-#define I2C_SCL                           PB_6
-#define I2C_SDA                          PB_7
+#define I2C_SCL                         PB_6
+#define I2C_SDA                         PB_7
 
-#define UART_TX                            PA_2 // uart 2
-#define UART_RX                            PA_3// uart 2
-#define UART_RTS                          PA_1
+#define UART_TX                         PA_2 // uart 2
+#define UART_RX                         PA_3// uart 2
+#define UART_RTS                        PA_1
 
-#define UART1_BAUDRATE             9600
-#define UART1_TX                          PA_9
-#define UART1_RX                          PA_10
-#define UART1_CTS                         PA_11
-#define UART1_RTS                         PA_12
-#define UART1_CK                          PA_8
-#define BAT_LEVEL                         GM_GPIO_13
+#define UART1_BAUDRATE                  9600
+#define UART1_TX                        PA_9
+#define UART1_RX                        PA_10
+#define UART1_CTS                       PA_11
+#define UART1_RTS                       PA_12
+#define UART1_CK                        PA_8
+#define BAT_LEVEL                       GM_GPIO_13
 
-#define SWDIO                                       PA_13
-#define SWCLK                                       PA_14
-#define BOOT_1      PB_2
+#define SWDIO                           PA_13
+#define SWCLK                           PA_14
+//#define BOOT_1                          PB_2  //Jason mark for SPI1 flash at 2019.08.19
 
-#define OSC_LSE_IN                                  PC_14
-#define OSC_LSE_OUT                                 PC_15
+#define OSC_LSE_IN                      PC_14
+#define OSC_LSE_OUT                     PC_15
 
-#define OSC_HSE_IN                                  PH_0
-#define OSC_HSE_OUT                                 PH_1
+#define OSC_HSE_IN                      PH_0
+#define OSC_HSE_OUT                     PH_1
 
 #define GM_GPIO_1                       PB_8
 #define GM_GPIO_2                       PA_3
@@ -444,68 +446,68 @@ void BoardSetBatteryCal(uint16_t value);
 #define GM_GPIO_7                       PA_5
 #define GM_GPIO_8                       PA_6
 #define GM_GPIO_9                       PA_7
-#define GM_GPIO_10                       PA_8
-#define GM_GPIO_11                       PA_11
-#define GM_GPIO_12                       PA_12
-#define GM_GPIO_13                       PB_0
-#define GM_GPIO_14                       PB_1
+#define GM_GPIO_10                      PA_8
+#define GM_GPIO_11                      PA_11
+#define GM_GPIO_12                      PA_12
+#define GM_GPIO_13                      PB_0
+#define GM_GPIO_14                      PB_1
 
 /*for STML073xx*/
-#define NO_USE_PC00                      PC_0
-#define NO_USE_PC01                      PC_1
-#define NO_USE_PC02                      PC_2
-#define NO_USE_PC03                      PC_3
-#define NO_USE_PC04                      PC_4
-#define NO_USE_PC05                      PC_5
-#define NO_USE_PC06                      PC_6
-#define NO_USE_PC07                      PC_7
+#define NO_USE_PC00                     PC_0
+#define NO_USE_PC01                     PC_1
+#define NO_USE_PC02                     PC_2
+#define NO_USE_PC03                     PC_3
+#define NO_USE_PC04                     PC_4
+#define NO_USE_PC05                     PC_5
+#define NO_USE_PC06                     PC_6
+#define NO_USE_PC07                     PC_7
 #ifndef ANT_PA
-#define NO_USE_PC08                      PC_8
+#define NO_USE_PC08                     PC_8
 #endif
-#define NO_USE_PC09                      PC_9
-#define NO_USE_PC10                      PC_10
-#define NO_USE_PC11                      PC_11
-#define NO_USE_PC12                      PC_12
+#define NO_USE_PC09                     PC_9
+#define NO_USE_PC10                     PC_10
+#define NO_USE_PC11                     PC_11
+#define NO_USE_PC12                     PC_12
 //#define NO_USE_PC13                      PC_13
 //#define NO_USE_PC14                      PC_14
 //#define NO_USE_PC15                      PC_15
 
-#define NO_USE_PD00                      PD_0
-#define NO_USE_PD01                      PD_1
-#define NO_USE_PD02                      PD_2
-#define NO_USE_PD03                      PD_3
-#define NO_USE_PD04                      PD_4
-#define NO_USE_PD05                      PD_5
-#define NO_USE_PD06                      PD_6
-#define NO_USE_PD07                      PD_7
-#define NO_USE_PD08                      PD_8
-#define NO_USE_PD09                      PD_9
-#define NO_USE_PD10                      PD_10
-#define NO_USE_PD11                      PD_11
-#define NO_USE_PD12                      PD_12
-#define NO_USE_PD13                      PD_13
-#define NO_USE_PD14                      PD_14
-#define NO_USE_PD15                      PD_15
+#define NO_USE_PD00                     PD_0
+#define NO_USE_PD01                     PD_1
+#define NO_USE_PD02                     PD_2
+#define NO_USE_PD03                     PD_3
+#define NO_USE_PD04                     PD_4
+#define NO_USE_PD05                     PD_5
+#define NO_USE_PD06                     PD_6
+#define NO_USE_PD07                     PD_7
+#define NO_USE_PD08                     PD_8
+#define NO_USE_PD09                     PD_9
+#define NO_USE_PD10                     PD_10
+#define NO_USE_PD11                     PD_11
+#define NO_USE_PD12                     PD_12
+#define NO_USE_PD13                     PD_13
+#define NO_USE_PD14                     PD_14
+#define NO_USE_PD15                     PD_15
 
-#define NO_USE_PE00                      PE_0
-#define NO_USE_PE01                      PE_1
-#define NO_USE_PE02                      PE_2
-#define NO_USE_PE03                      PE_3
-#define NO_USE_PE04                      PE_4
-#define NO_USE_PE05                      PE_5
-#define NO_USE_PE06                      PE_6
-#define NO_USE_PE07                      PE_7
-#define NO_USE_PE08                      PE_8
-#define NO_USE_PE09                      PE_9
-#define NO_USE_PE10                      PE_10
-#define NO_USE_PE11                      PE_11
-#define NO_USE_PE12                      PE_12
-#define NO_USE_PE13                      PE_13
-#define NO_USE_PE14                      PE_14
-#define NO_USE_PE15                      PE_15
+#define NO_USE_PE00                     PE_0
+#define NO_USE_PE01                     PE_1
+#define NO_USE_PE02                     PE_2
+#define NO_USE_PE03                     PE_3
+#define NO_USE_PE04                     PE_4
+#define NO_USE_PE05                     PE_5
+#define NO_USE_PE06                     PE_6
+#define NO_USE_PE07                     PE_7
+#define NO_USE_PE08                     PE_8
+#define NO_USE_PE09                     PE_9
+#define NO_USE_PE10                     PE_10
+#define NO_USE_PE11                     PE_11
+#define NO_USE_PE12                     PE_12
+#define NO_USE_PE13                     PE_13
+#define NO_USE_PE14                     PE_14
+#define NO_USE_PE15                     PE_15
 
-#define NO_USE_PH09                      PH_9
-#define NO_USE_PH10                      PH_10
+#define NO_USE_PH09                     PH_9
+#define NO_USE_PH10                     PH_10
 
 #elif NODE_BOARD
 

@@ -426,11 +426,11 @@ void BoardInitPeriph( void )
         SystemClockConfig_STOP();
     }
 //    GPIO_ConfigAN();
-#if defined (MODBUS_BOARD) || defined (NODE_BOARD)
+// #if defined (MODBUS_BOARD) || defined (NODE_BOARD)
     SpiInit(SPIInterface1);
-#elif defined (TRACKER_BOARD) || defined (SIPMODULE_BOARD) || defined (MANHOLE_BOARD) || defined (EARTAG_BOARD)
+// #elif defined (TRACKER_BOARD) || defined (SIPMODULE_BOARD) || defined (MANHOLE_BOARD) || defined (EARTAG_BOARD)
     SpiInit(SPIInterface2);
-#endif
+// #endif
 
 #if defined (TRACKER_BOARD) || defined (MANHOLE_BOARD) || defined (NODE_BOARD) || defined (RPMA_ST_NODE)
     I2C1Init();
