@@ -168,6 +168,44 @@ void EagleUartSend(uint32_t timer)
     sendData.DataLen = 0;
     teg = 1;
 }
+
+void sendMotorData(bool isRxData, unsigned char *receivedata)
+{
+		memset(EagleAppdata,'\0',EAGLE_APP_DATA_SIZE);  //Reset
+	
+		for(i=0; i<34; i++)
+		{
+        if(isRxData)
+			  {
+						if(i < 12)
+					      EagleAppdata[i] = receivedata[3+i];  //0~11 <->3~14
+						else if(i >11 && i < 22)
+						    EagleAppdata[i] = receivedata[19+i]; //12~21 <->31~40
+						else if(i > 21)
+						    EagleAppdata[i] = receivedata[29+i]; //22~33 <->51~62
+				}
+				else
+				{
+					  EagleAppdata[i] = 0x00;
+				}	
+		}
+		EagleSendData.DataLen = sizeof(EagleAppdata);
+		EagleSendData.Data = EagleAppdata;
+		SendQueueToRadio(SendUnConfirmedDataUp, &EagleSendData);
+		readFlag = false;
+		SendQueueToUartTask(UartToSleep,UseUartID,NULL);
+}
+
+//Jason modify on 2018.11.15 for check if UART sensor response timer callback
+void CheckMotorReplyCallback(uint32_t time)
+{
+    if(UartSensorReplyFlag != 1 ) //sensor not response -> timeout
+    {
+			  sendMotorData(false, NULL);
+	  }
+}
+
+
 #endif
 
 //Eagle 馬達驅動器
@@ -1365,8 +1403,12 @@ void UartTask(void * pvParameters)
 	  //Jason add on 2018.10.31
 	  mySensorType = mySenConfig.sensorType;
     myPollingMode = GetAtConfig().Enter_Reporter; //daniel add on 2017.3.28
-	  
-#if 1 //daniel add on 2017.5.6 for test
+#if defined( HAYLEYS_MOTOR )
+    AtConfig.DEVICE_TYPE = 0;//0 sensor hub, 1~3 control box
+    myPollingMode = 1; //0 AT_COMMAND, 1:Report
+		WirelessModule = 0;//0 Lora, 1 NBIOT, 2 BT
+#endif  	  
+#if 0 //daniel add on 2017.5.6 for test
     {
     // uint8_t meterCMD[8] = {0xa5, 0x04, 0x00, 0x00, 0x00, 0x07, 0xa8, 0xec};
 		AtConfig.DEVICE_TYPE = 0;
@@ -1376,6 +1418,7 @@ void UartTask(void * pvParameters)
     // memcpy(mySenConfig.modbusCMD, meterCMD, sizeof(meterCMD));
     }
 #endif
+
     //daniel mark on 2017.4.24 for not create reporter task
     /*Start Routine Task Timer*/
     // if(GetReporterMode() == 1)
@@ -1507,7 +1550,11 @@ void UartTask(void * pvParameters)
             {
 							  PWR5V(1); //daniel move here on 2018.5.8 for turn on output power & 485 IC
 							  setUART();//Jason move on 2019.05.20
-							  
+#if defined( HAYLEYS_MOTOR )
+							  UartSensorReplyFlag = 0;
+                EagleUartSend(0);
+							  CheckReplyTimer = AddTimer(CheckReplyTimer, 3000, 0, CheckMotorReplyCallback);
+#else										  
                 if(mySenConfig.sensorType == 0) //none uart sensor
                 {
 									  sendSensorData(mySenConfig.sensorType, NULL);
@@ -1528,6 +1575,7 @@ void UartTask(void * pvParameters)
 									  memset(sensorData,'\0',SENSOR_DATA_SIZE);//Reset sensorData
                     PollingTimer = AddTimer(PollingTimer, 3000, 0, GetSensorDataCallback); //daniel modify on 2017.9.25
                 }
+#endif										
                 break;
             }
 
@@ -1537,6 +1585,64 @@ void UartTask(void * pvParameters)
                 {
 										EnterLPMCount = 0; //LowPowerModeCount = 0; //daniel modify on 2017.12.25
 										receivedChar = ReceivedData.body.ISRData;
+#if defined( HAYLEYS_MOTOR )
+                    /*For Eagle*/
+									  if(readFlag)
+										{   
+												receivedCharBuffer[receivedLength] = receivedChar;
+											  receivedLength++;
+											  if(receivedLength == 65)
+												{
+													  UartSensorReplyFlag = 1;
+														receivedCharBuffer[receivedLength] = (uint8_t) 0;
+														
+														//build data
+													
+													  /*EagleAppdata[0] = receivedCharBuffer[3];
+														EagleAppdata[1] = receivedCharBuffer[4];
+														EagleAppdata[2] = receivedCharBuffer[5];
+														EagleAppdata[3] = receivedCharBuffer[6];
+														EagleAppdata[4] = receivedCharBuffer[7];
+														EagleAppdata[5] = receivedCharBuffer[8];
+														EagleAppdata[6] = receivedCharBuffer[9];
+														EagleAppdata[7] = receivedCharBuffer[10];
+														EagleAppdata[8] = receivedCharBuffer[11];
+													  EagleAppdata[9] = receivedCharBuffer[12];
+													  EagleAppdata[10] = receivedCharBuffer[13];
+											      EagleAppdata[11] = receivedCharBuffer[14];
+														EagleAppdata[12] = receivedCharBuffer[31];
+														EagleAppdata[13] = receivedCharBuffer[32];
+														EagleAppdata[14] = receivedCharBuffer[33];
+														EagleAppdata[15] = receivedCharBuffer[34];
+														EagleAppdata[16] = receivedCharBuffer[35];
+														EagleAppdata[17] = receivedCharBuffer[36];
+														EagleAppdata[18] = receivedCharBuffer[37];
+													  EagleAppdata[19] = receivedCharBuffer[38];
+													  EagleAppdata[20] = receivedCharBuffer[39];
+														EagleAppdata[21] = receivedCharBuffer[40];
+														EagleAppdata[22] = receivedCharBuffer[51];
+														EagleAppdata[23] = receivedCharBuffer[52];
+														EagleAppdata[24] = receivedCharBuffer[53];
+														EagleAppdata[25] = receivedCharBuffer[54];
+														EagleAppdata[26] = receivedCharBuffer[55];
+														EagleAppdata[27] = receivedCharBuffer[56];
+														EagleAppdata[28] = receivedCharBuffer[57];
+													  EagleAppdata[29] = receivedCharBuffer[58];
+													  EagleAppdata[30] = receivedCharBuffer[59];
+														EagleAppdata[31] = receivedCharBuffer[60];
+														EagleAppdata[32] = receivedCharBuffer[61];
+														EagleAppdata[33] = receivedCharBuffer[62];													
+														EagleSendData.DataLen = sizeof(EagleAppdata);
+														EagleSendData.Data = EagleAppdata;
+														SendQueueToRadio(SendUnConfirmedDataUp, &EagleSendData);*/
+														//reset
+														sendMotorData(true, receivedCharBuffer);
+														memset(receivedCharBuffer,'\0',ATCOMMAND_BUFFER_SIZE);
+														receivedLength = 0;
+														readFlag = false;
+												}
+										}
+#else
 										bool isOK = false;
 										//daniel add on 2018.5.13 for avoid getting garbage data - begin
 										if(receivedLength==0 && receivedChar==0x00)
@@ -1579,6 +1685,7 @@ void UartTask(void * pvParameters)
 												memset(receivedCharBuffer,'\0',ATCOMMAND_BUFFER_SIZE);  //Reset receivedCharBuffer
 												receivedLength = 0;
 										}
+#endif										
                 }
 								else
 								{ //Jason modify for UART_2 (at command & wireless module command) on 2019.05,20
