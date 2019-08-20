@@ -240,7 +240,8 @@ void Spi1WriteBuffer( uint8_t addr, uint8_t *buffer, uint8_t size, uint8_t nssSw
     {
         SPI_NSS1_LOW();
     }
-    Spi1InOut(addr);
+		//SpiInOut(addr | 0x80 );
+    Spi1InOut(addr & 0x7F);
     for( i = 0; i < size; i++ )
     {
         Spi1InOut(buffer[i] );
@@ -278,7 +279,7 @@ void Spi1ReadBuffer( uint8_t addr, uint8_t *buffer, uint8_t size, uint8_t nssSwi
     }
 
     //Spi1InOut(addr & 0x7F );
-		Spi1InOut(addr);
+		Spi1InOut(addr| 0x80);
 
     for( i = 0; i < size; i++ )
     {
@@ -351,7 +352,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *hspi)
     GPIO_InitStruct.Pin       = GPIO_PIN_5;
     GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull      = GPIO_PULLDOWN;
-    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+    GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_LOW;//GPIO_SPEED_FREQ_VERY_HIGH;
     GPIO_InitStruct.Alternate = GPIO_AF0_SPI1;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 

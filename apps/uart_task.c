@@ -1,6 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
-
+#include "spi-board.h" //Jason add t 2019.08.19
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
@@ -205,6 +205,90 @@ void CheckMotorReplyCallback(uint32_t time)
 	  }
 }
 
+void spi1ReadBuffer( uint8_t addr, uint8_t *buffer, uint8_t size )
+{
+    Spi1ReadBuffer(addr, buffer, size, 0);
+}
+
+uint8_t spi1Read( uint8_t addr )
+{
+    uint8_t mData;
+    Spi1ReadBuffer(addr, &mData, 1, 0);
+    return mData;
+}
+
+
+
+void spi1Write( uint8_t addr, uint8_t data )
+{
+    Spi1WriteBuffer( addr, &data, 1, 0);
+}
+
+void spi1WriteBuffer( uint8_t addr, uint8_t *buffer, uint8_t size )
+{
+    Spi1WriteBuffer(addr, buffer, size, 0);
+}
+
+void setSampling(uint8_t mode, uint8_t tempSampling, uint8_t pressSampling, uint8_t filter, uint8_t duration) {
+  uint8_t _mode = 0x03;   //Normal mode
+  uint8_t _osrs_t = 0x02; //Temp. oversampling X2
+  uint8_t _osrs_p = 0x05; //Pressure oversampling X16
+  uint8_t _filter = 0x04; //Filtering X16
+  uint8_t _t_sb = 0x04;   //Standby time STANDBY_MS_500 : 500 ms
+	uint8_t spi3w_en = 0x00;
+	
+	uint8_t BMP280_REGISTER_CONFIG = 0xF5;
+	uint8_t BMP280_REGISTER_CONTROL = 0xF4;
+	
+	uint8_t config_value = (_t_sb << 5) | (_filter << 2) | spi3w_en;
+	uint8_t control_value = (_osrs_t << 5) | (_osrs_p << 2) | _mode; 
+
+  spi1Write(BMP280_REGISTER_CONFIG, config_value);
+  spi1Write(BMP280_REGISTER_CONTROL, control_value);
+}
+
+int32_t readTemperature() {
+	  bmp280_calib_data _bmp280_calib;
+	  uint32_t myBuff[3];
+    int32_t var1, var2;
+	  int32_t t_fine;
+    uint8_t BMP280_REGISTER_TEMPDATA = 0xFA;
+    uint8_t i;
+    for( i = 0; i < 3; i++ )
+    {
+        myBuff[i] = spi1Read(BMP280_REGISTER_TEMPDATA);
+        BMP280_REGISTER_TEMPDATA++;
+    }
+
+    int32_t adc_T = (myBuff[0] << 16) | (myBuff[1] << 8) | (myBuff[2]);
+    adc_T >>= 4;
+
+    var1 = ((((adc_T >> 3) - ((int32_t)_bmp280_calib.dig_T1 << 1))) *
+          ((int32_t)_bmp280_calib.dig_T2)) >>
+         11;
+
+    var2 = (((((adc_T >> 4) - ((int32_t)_bmp280_calib.dig_T1)) *
+            ((adc_T >> 4) - ((int32_t)_bmp280_calib.dig_T1))) >>
+           12) *
+          ((int32_t)_bmp280_calib.dig_T3)) >>
+         14;
+
+    t_fine = var1 + var2;
+
+    float T = (t_fine * 5 + 128) >> 8;
+    return T / 100;
+		//return adc_T;
+}
+
+void spiTest(uint32_t st)
+{
+	  uint8_t id = 0xE1;
+	  //uint8_t data1,data2,data3;
+	  
+	  id = spi1Read(0xD0);
+	  setSampling(3, 2, 5, 4, 4);
+	  int32_t temp = readTemperature();
+}
 
 #endif
 
@@ -1407,6 +1491,7 @@ void UartTask(void * pvParameters)
     AtConfig.DEVICE_TYPE = 0;//0 sensor hub, 1~3 control box
     myPollingMode = 1; //0 AT_COMMAND, 1:Report
 		WirelessModule = 0;//0 Lora, 1 NBIOT, 2 BT
+		spiTest(0);
 #endif  	  
 #if 0 //daniel add on 2017.5.6 for test
     {
@@ -1784,8 +1869,7 @@ void UartTask(void * pvParameters)
 											{
 												//For AT_COmmand
 												if((receivedChar == CHAR_LF)||(receivedChar == CHAR_CR))
-												{   //Jason fix return error message at 2019.08.16
-													
+												{
 													  if(receivedLength == 0)
 														{
 																break;
