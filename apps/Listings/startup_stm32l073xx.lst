@@ -419,11 +419,11 @@ ARM Macro Assembler    Page 7
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M0+ --apcs=inter
 work --depend=.\objects\startup_stm32l073xx.d -o.\objects\startup_stm32l073xx.o
- -ID:\1project\Hayleys馬達\SIPModule-G76-v1.15.10.5_modify6\apps\RTE -IC:\Keil_
-v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\Incl
-ude --predefine="__UVISION_VERSION SETA 520" --predefine="STM32L073xx SETA 1" -
--list=.\listings\startup_stm32l073xx.lst ..\boardl07\CMSIS\Device\ST\STM32L0xx\
-Source\Templates\arm\startup_stm32l073xx.s
+ -ID:\1project\Hayleys馬達\FW\SIPModule-G76-v1.15.10.5_modify8\apps\RTE -IC:\Ke
+il_v5\ARM\PACK\Keil\STM32L0xx_DFP\1.6.0\Device\Include -IC:\Keil_v5\ARM\CMSIS\I
+nclude --predefine="__UVISION_VERSION SETA 520" --predefine="STM32L073xx SETA 1
+" --list=.\listings\startup_stm32l073xx.lst ..\boardl07\CMSIS\Device\ST\STM32L0
+xx\Source\Templates\arm\startup_stm32l073xx.s
 
 
 

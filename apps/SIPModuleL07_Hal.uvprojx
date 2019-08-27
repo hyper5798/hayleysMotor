@@ -332,7 +332,7 @@
             <v6WtE>0</v6WtE>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>USE_16CH SIPMODULE_BOARD STM32L073xx USE_HAL_DRIVER HSE_VALUE=24000000 ANT_PA AT_COMMAND_FOR_SIP</Define>
+              <Define>USE_16CH SIPMODULE_BOARD HAYLEYS_MOTOR STM32L073xx USE_HAL_DRIVER HSE_VALUE=24000000 ANT_PA AT_COMMAND_FOR_SIP</Define>
               <Undefine></Undefine>
               <IncludePath>.\include;..\boardl07;..\boardl07\CMSIS\Include;..\boardl07\interface\include;..\boardl07\STM32L0xx_HAL_Driver\Inc;..\boardl07\CMSIS\Device\ST\STM32L0xx\Include;.\LoRaMac;.\LoRaMac\crypto;..\common;..\common\crypto\include;..\FreeRTOS\Source\include;..\FreeRTOS\Source\CMSIS_RTOS;..\FreeRTOS\Source\portable\RVDS\ARM_CM0;..\peripherals\include;.\at_command</IncludePath>
             </VariousControls>

@@ -1493,11 +1493,11 @@ void UartTask(void * pvParameters)
 		WirelessModule = 0;//0 Lora, 1 NBIOT, 2 BT
 		spiTest(0);
 #endif  	  
-#if 0 //daniel add on 2017.5.6 for test
+#if 1 //daniel add on 2017.5.6 for test
     {
     // uint8_t meterCMD[8] = {0xa5, 0x04, 0x00, 0x00, 0x00, 0x07, 0xa8, 0xec};
 		AtConfig.DEVICE_TYPE = 0;
-    myPollingMode = 1; //0 AT_COMMAND, 1:Report
+    myPollingMode = 0; //0 AT_COMMAND, 1:Report
     // mySenConfig.sensorType = 1; mySenConfig.replyLEN = 19; mySenConfig.startBYTE = 13; mySenConfig.readLEN = 6;
     // mySenConfig.uartPC = EVEN_PARITY; mySenConfig.modbusCMDLEN = 8;
     // memcpy(mySenConfig.modbusCMD, meterCMD, sizeof(meterCMD));
@@ -1805,7 +1805,7 @@ void UartTask(void * pvParameters)
 																		} 
 																	  else 
 																	  {
-																			  SendMsgToUart("Start TEST Mode! (AT_COMMAND) \r\n", UseUartID);
+																			  SendMsgToUart("Start Test Mode! (AT_COMMAND) \r\n", UseUartID);
 																		}
 																		if(myPollingMode == 0)
 																		{

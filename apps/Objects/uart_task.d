@@ -1,9 +1,10 @@
 .\objects\uart_task.o: uart_task.c
 .\objects\uart_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\uart_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\uart_task.o: ..\boardl07\interface\include\spi-board.h
+.\objects\uart_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\uart_task.o: ..\FreeRTOS\Source\include\FreeRTOS.h
 .\objects\uart_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-.\objects\uart_task.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\uart_task.o: ..\FreeRTOS\Source\include\FreeRTOSConfig.h
 .\objects\uart_task.o: ..\FreeRTOS\Source\include\projdefs.h
 .\objects\uart_task.o: ..\FreeRTOS\Source\include\portable.h
